@@ -16,14 +16,13 @@
 
    @version $Revision: 1.1.1.1 $ $Date: 2006/01/25 12:46:40 $ */
 
-class RandomSingleton : public rlu_random
-{
+class RandomSingleton : public rlu_random {
  public:
   /**
      Construct a new RandomSingleton object if it does not already exists.
 
      @return A pointer to the RandomSingleton object. */
-  static RandomSingleton* instance();
+  static RandomSingleton *instance();
 
  protected:
   /**
@@ -33,7 +32,7 @@ class RandomSingleton : public rlu_random
   RandomSingleton();
 
  private:
-  static RandomSingleton* instance_;
+  static RandomSingleton *instance_;
 };
 
 #endif

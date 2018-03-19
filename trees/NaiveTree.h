@@ -9,25 +9,23 @@
 
 using namespace std;
 
-namespace trees
-{
-  class Node;
-  class Exception;
-  
-  /**
-   *  Tree structure to hold naive probabilities for different words.
-   * \author  Daniel Dalevi
-   * \version 1.0
-   * \date 2005-05-30
-   */
-  class NaiveTree : public FixedTree 
-  {
-  public: 
-    NaiveTree() {}
-    NaiveTree( const Alphabet*, const int& ); 
-    ~NaiveTree();
+namespace trees {
+class Node;
+class Exception;
 
-    double prob( const string& pat );
-  };
-}
+/**
+ *  Tree structure to hold naive probabilities for different words.
+ * \author  Daniel Dalevi
+ * \version 1.0
+ * \date 2005-05-30
+ */
+class NaiveTree : public FixedTree {
+ public:
+  NaiveTree() {}
+  NaiveTree(const Alphabet *, const int &);
+  ~NaiveTree();
+
+  double prob(const string &pat);
+};
+}  // namespace trees
 #endif

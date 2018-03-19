@@ -4,11 +4,11 @@
 #ifndef xxxFASTAxxx
 #define xxxFASTAxxx
 
+#include <RandomSingleton.h>
+#include <cassert>
 #include <fstream>
 #include <iostream>
 #include <string>
-#include <cassert>
-#include <RandomSingleton.h>
 
 using namespace std;
 
@@ -22,10 +22,10 @@ class rlu_random;
  * \autor Daniel Dalevi
  * \date 2004-spring
  */
-class Fasta 
-{
+class Fasta {
   static const size_t MAXLINELENGTH = 10000;
-public:
+
+ public:
   /**
    * Instantiates the random singleton if necessary
    */
@@ -39,13 +39,16 @@ public:
   /**
    * Specify the fasta-file to use
    */
-  void setFastaFile( const string& s ) { fastaname_ = s; this->open(); } 
+  void setFastaFile(const string &s) {
+    fastaname_ = s;
+    this->open();
+  }
 
   /**
    * If random regions should be drawn from the fasta sequence use
    * this funciton if wanting to specify seed
    */
-  void setSeed( const int& seed );
+  void setSeed(const int &seed);
 
   /**
    * \return name of fasta-sequence read from header-line
@@ -55,69 +58,57 @@ public:
   /**
    * Will get next entry in (call once un-less multifastasfile)
    */
-  bool getNext( string&, string& );
+  bool getNext(string &, string &);
 
   /**
    * \return a random string of length l
    */
-  string getSequenceFromRandomIntervall( const int&, double& );
+  string getSequenceFromRandomIntervall(const int &, double &);
 
   /**
    * \return the length of the fasta-file
    */
-  int getLength(); 
+  int getLength();
 
   /**
    * \param str string
-   * Removes space and new-line characters from the string 
+   * Removes space and new-line characters from the string
    */
-  void chomp( string& str );
+  void chomp(string &str);
 
   /**
    * rewind the fasta-file so that getNext() will return the first sequence.
    */
-  void rewind() 
-  {
-    assert( fastaname_.length() > 0 );
+  void rewind() {
+    assert(fastaname_.length() > 0);
     fin_.close();
-    fin_.open( fastaname_.c_str() );
-    if( !fin_ ) 
-      {
-       cerr << "Could not open file: " << fastaname_ << endl;
-       exit( 0 );
-      }
+    fin_.open(fastaname_.c_str());
+    if (!fin_) {
+      cerr << "Could not open file: " << fastaname_ << endl;
+      exit(0);
+    }
   }
 
-
-private:
+ private:
   string fastaname_;
   ifstream fin_;
   string sequence_;
-  RandomSingleton* prand_;
+  RandomSingleton *prand_;
   bool firstCall_;
- 
 
   bool setSequence();
-  
+
   /**
    * open the fasta-file for reading
    */
-  void open() 
-  {
-    assert( fastaname_.length() > 0 );
-    fin_.open( fastaname_.c_str() );
-    if( !fin_ ) 
-      {
-       cerr << "Could not open file: " << fastaname_ << endl;
-       exit( 0 );
-      }
+  void open() {
+    assert(fastaname_.length() > 0);
+    fin_.open(fastaname_.c_str());
+    if (!fin_) {
+      cerr << "Could not open file: " << fastaname_ << endl;
+      exit(0);
+    }
   }
-
-
-
 };
 
-
 #endif
-
-

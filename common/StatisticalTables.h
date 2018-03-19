@@ -5,22 +5,20 @@
 #ifndef xxxSTATTABLExxx
 #define xxxSTATTABLExxx
 
-
-#include <vector>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
-class StatisticalTables
-{
-public:
+class StatisticalTables {
+ public:
   /**
-   * Function that returns the sig%-quantile of a Chi-square distribution  
+   * Function that returns the sig%-quantile of a Chi-square distribution
    * \param r This is the number of degrees of freedom
    * \param sig The percentage of mass of the "right"-tail of the distribution
    * \return Chi( r, sig )
    */
-  static double quantileChiSquare( const int& r, const double& sig );
+  static double quantileChiSquare(const int &r, const double &sig);
 };
 
 #endif

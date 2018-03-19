@@ -49,8 +49,7 @@ const string APP_NAME = "classifier";
 const string PARAM_TAG = "parameters";
 
 // The allowed arguments
-static string PARAM_DEFINED_ARGS[][8] = 
-{
+static string PARAM_DEFINED_ARGS[][8] = {
   // General params
 { "-ff"      ,  "-fasta_file"               , "infile.fna"      , PARAM_STRING  , PARAM_NORMAL, "", PARAM_TRUE, PARAM_TRUE },
 { "-seq"      ,  "-seq_file"                , "seq.fna"         , PARAM_STRING  , PARAM_NORMAL, "", PARAM_TRUE, PARAM_TRUE },

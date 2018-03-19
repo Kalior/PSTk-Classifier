@@ -2,21 +2,17 @@
 // Distributed under the GNU GENERAL PUBLIC LICENSE version 2
 
 #include "TreeModifier.h"
-#include "Tree.h"
 #include "Node.h"
+#include "Tree.h"
 
 using namespace trees;
 
-
-TreeModifier::TreeModifier( Tree* tree )
-{
+TreeModifier::TreeModifier(Tree *tree) {
   tree_ = tree;
-  tree_->setHeadForTM( this );
+  tree_->setHeadForTM(this);
 }
 
-
-TreeModifier::TreeModifier( Node* pHead, Tree* tree )
-{
+TreeModifier::TreeModifier(Node *pHead, Tree *tree) {
   head_ = pHead;
   tree_ = tree;
 }

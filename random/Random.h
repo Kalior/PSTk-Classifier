@@ -1,17 +1,16 @@
 // $Id: Random.h,v 1.1.1.1 2006/01/25 12:46:40 daniel Exp $
 
-
 #ifndef cpp_tools_random_h
 #define cpp_tools_random_h
 
-#include <fstream>
+#include <cmath>
 #include <cstdlib>
 #include <cstring>
 #include <ctime>
-#include <cmath>
+#include <fstream>
 #include <iostream>
 
-static const double MyPI = 4*atan( 1.0 );
+static const double MyPI = 4 * atan(1.0);
 /**
    Pseudo random number generator.
 
@@ -45,9 +44,8 @@ static const double MyPI = 4*atan( 1.0 );
 
    @version $Revision: 1.1.1.1 $ $Date: 2006/01/25 12:46:40 $ */
 
-class rlu_random
-{
-public:
+class rlu_random {
+ public:
   /**
      Construct a rlu_random object. The first argument is the seed to
      use, and the second argument defines the preferred bit size for
@@ -55,35 +53,35 @@ public:
      size supported by the CPU. */
 #ifdef __i386__
   // bit size should be read somewhere in the machine
-  rlu_random(long sd=19780503,long bitsize_=24);
+  rlu_random(long sd = 19780503, long bitsize_ = 24);
 #else
-  rlu_random(long sd=19780503,long bitsize_=48);
+  rlu_random(long sd = 19780503, long bitsize_ = 48);
 #endif
 
-  //Functions added for refactoring code
+  // Functions added for refactoring code
   bool CheckPrecission();
   void InitVariables();
 
   /**
      Return the bit size of the object. */
-  inline long	bitsize(void)					const;
+  inline long bitsize(void) const;
 
   /**
      Return the number of calls to the flat() member function (total of
      internal and external calls). */
-  inline long	calls(void)					const;
+  inline long calls(void) const;
 
   /**
      Write the state of the object to a file 'rlu_random.dat'. */
-  inline void	dump(void)					const;
-  
+  inline void dump(void) const;
+
   /**
      Returns an exponentially distributed random number. The numbers
      will be distributed according to the continuous probability
      distribution \f$f(x) = \lambda \exp{-\lambda x}\f$, expectation
      value \f$\mu = \lambda^{-1}\f$, and variance \f$\sigma^2 =
      \lambda^{-2}\f$ */
-  inline double exponential(const double lambda=1);
+  inline double exponential(const double lambda = 1);
 
   /**
      Check whether the argument is (randomly) accepted using
@@ -93,7 +91,7 @@ public:
      checks are done.
 
      @see exponential */
-  inline bool exponential_accept(const double, const double lambda=1);
+  inline bool exponential_accept(const double, const double lambda = 1);
 
   /**
      Return a uniformly distributed random number. The numbers will be
@@ -103,7 +101,7 @@ public:
      \f$a=0, \, b=1 \rightarrow \mu=1/2, \, \sigma^2=1/12\f$.
 
      Are 0 and/or 1 included in the possible return values? */
-  double	flat(void);
+  double flat(void);
 
   /**
      Check whether the argument is (randomly) accepted using uniformly
@@ -139,7 +137,7 @@ public:
      \f$\sigma^2=n/\lambda^2\f$.
 
      @see gamma(const double n) for non-integer \a n */
-  double gamma(const size_t n=1,const double lambda=1);
+  double gamma(const size_t n = 1, const double lambda = 1);
 
   /**
      Return a random number distributed according to the Gauss
@@ -152,12 +150,12 @@ public:
      \f$\mu\f$ and variance \f$\sigma^2\f$.
 
      @see normal */
-  inline double gauss1d(const double sigma=1,const double mu=0);
+  inline double gauss1d(const double sigma = 1, const double mu = 0);
 
   /**
      Return two random numbers distributed according to a two
      dimensional Gauss distribution. More documentation here please.*/
-  void		gauss2d(double& x,double& y,double sigma=1);
+  void gauss2d(double &x, double &y, double sigma = 1);
 
   /**
      Return a normal distributed random number. The numbers will be
@@ -172,7 +170,7 @@ public:
      Reset the object, and re-initialize it using the seed \a sd. If
      no argument is given, or if it is equal to 0, the seed is taken
      from the time of the day (read the source). */
-  long randomize(const long sd=0);
+  long randomize(const long sd = 0);
 
   /**
      Restore a rlu_random object state from file 'rlu_random.dat'. */
@@ -182,7 +180,7 @@ public:
      Reset the object. The object is reset to its initial state if \a
      sd is 0, otherwise it is reset to a state with a seed equal to \a
      sd.  */
-  inline void reset(const long sd=0);
+  inline void reset(const long sd = 0);
 
   /**
      Returns the objects seed. */
@@ -191,79 +189,59 @@ public:
   /**
      Returns a uniformly distributed random unsigned integer between 0
      and \a k - 1 (or \a k, depends on flat(), check this). */
-  inline size_t operator() (const size_t k);
+  inline size_t operator()(const size_t k);
 
   /**
      Writes the state of the object to the stream specified by the
      caller. */
-  friend std::ostream& operator<<(std::ostream&,const rlu_random&);
+  friend std::ostream &operator<<(std::ostream &, const rlu_random &);
 
   /**
      Reads the state of the object from the stream specified by the
      caller. */
-  friend std::istream& operator>>(std::istream&,rlu_random&);
-  //inline double rlu_random::normal(void);
+  friend std::istream &operator>>(std::istream &, rlu_random &);
+  // inline double rlu_random::normal(void);
 
-
-private:
-  double	_dmax;
-  long		_bitsize, _rmax, _seed, _count, _i1, _i2;
-  long		_rr[97], _rr97, _rr98, _rr99;
+ private:
+  double _dmax;
+  long _bitsize, _rmax, _seed, _count, _i1, _i2;
+  long _rr[97], _rr97, _rr98, _rr99;
 };
 
+inline long rlu_random::bitsize(void) const { return _bitsize; }
 
-inline long rlu_random::bitsize(void) const
-{
-  return _bitsize;
-}
+inline long rlu_random::calls(void) const { return _count; }
 
-inline long rlu_random::calls(void) const
-{
-  return _count;
-}
-  
-inline void rlu_random::dump(void) const
-{
+inline void rlu_random::dump(void) const {
   std::ofstream out("rlu_random.dat");
   out << *this;
 }
 
 double exponential(const double l);
 
-inline bool rlu_random::exponential_accept(const double x, const double lambda)
-{
-  return static_cast<bool>(lambda*exp(-x*lambda)>flat());
+inline bool rlu_random::exponential_accept(const double x,
+                                           const double lambda) {
+  return static_cast<bool>(lambda * exp(-x * lambda) > flat());
 }
 
-inline bool rlu_random::flat_accept(const double p)
-{
-  return p>flat();
+inline bool rlu_random::flat_accept(const double p) { return p > flat(); }
+
+inline double rlu_random::gauss1d(const double sigma, const double mu) {
+  return normal() * sigma + mu;
 }
 
-inline double rlu_random::gauss1d(const double sigma,const double mu)
-{
-  return normal()*sigma+mu;
+inline void rlu_random::reset(const long sd) {
+  *this = rlu_random(sd ? sd : _seed);
 }
 
-
-inline void rlu_random::reset(const long sd)
-{
-  *this=rlu_random(sd ? sd : _seed);
-}
-
-inline void rlu_random::restore(void)
-{
+inline void rlu_random::restore(void) {
   std::ifstream in("rlu_random.dat");
   in >> *this;
 }
 
-inline long rlu_random::seed(void) const
-{
-  return _seed;
-}
+inline long rlu_random::seed(void) const { return _seed; }
 
-inline size_t rlu_random::operator() (const size_t k)
-{
-  return static_cast<size_t>(k*flat());
+inline size_t rlu_random::operator()(const size_t k) {
+  return static_cast<size_t>(k * flat());
 }
 #endif
