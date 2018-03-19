@@ -153,8 +153,6 @@ void Classifier::train() {
     if (params_->GetBoolParam("-c_c")) {
       const double cutoff = params_->GetDoubleParam("-nc");
       tree_->prune(cutoff);
-      tree_->draw();
-      return;
     } else {
       tree_->prune(params_->GetIntParam("-npar"));
     }
