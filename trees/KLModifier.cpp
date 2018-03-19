@@ -46,7 +46,6 @@ void KLModifier::prune(const int &num) {
 
   vector<double> deltas;
   getAllDeltas(head_, deltas);
-  if (deltas.size() < num) return;
   sort(deltas.begin(), deltas.end());
   reverse(deltas.begin(), deltas.end());
   //  for( size_t i = 0; i < deltas.size(); ++i ) cout << deltas[i] << endl;
