@@ -177,7 +177,7 @@ void PSModifier::prune(const int &npar) {
 
   while (true) {
     vector<Node *> terminal = tree_->getTerminalNodes();
-    vector<MyPair<Node *, double>> deltas;
+    vector<MyPair<Node *, double> > deltas;
     for (int i = 0; i < terminal.size(); ++i) {
       //	   cout << terminal[i]->getString() << " " <<
       // terminal[i]->getTmpData() << endl;
