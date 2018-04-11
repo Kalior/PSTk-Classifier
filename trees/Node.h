@@ -60,7 +60,11 @@ class Node {
    * \return total number of free parameters
    */
   static int getNumberParameters() {
-    return ((alphabet->size() - 1) * (DIMENSION));
+    if (countFreeParametersIndividually) {
+      return numberOfFreeParameters;
+    } else {
+      return ((alphabet->size() - 1) * (DIMENSION));
+    }
   }
 
   /**
@@ -86,6 +90,7 @@ class Node {
   static void sReset() {
     NUMBERNODES = 0;
     DIMENSION = 0;
+    numberOfFreeParameters = 0;
   }
 
   /**
@@ -283,6 +288,11 @@ class Node {
    */
   void print(const bool & = false) const;
 
+
+  int getNumberOfFreeParameters();
+  int getNumberOfNullChildren();
+  static bool setCountFreeParametersIndividually() { countFreeParametersIndividually = true; }
+
  private:
   // Common to all objects
   static int NUMBERNODES;
@@ -290,6 +300,9 @@ class Node {
   static const Alphabet *alphabet;
   static bool headHasNullPointer;
   static double totalTotal;
+
+  static int numberOfFreeParameters;
+  static bool countFreeParametersIndividually;
 
   // Inner data of individuals
   vector<Node *> children_;

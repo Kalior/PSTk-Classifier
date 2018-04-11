@@ -76,6 +76,7 @@ static string PARAM_DEFINED_ARGS[][8] = {
 { "-m"       ,  "-model"                    , "1"               , PARAM_NUMBER  , PARAM_NORMAL, "", PARAM_TRUE, PARAM_TRUE },
 { "-pruning" ,  "-pruning_algorithm"        , "KL"              , PARAM_STRING  , PARAM_NORMAL, "", PARAM_TRUE, PARAM_TRUE },
 { "-pseudo"  ,  "-pseudo_count"             , PARAM_FALSE       , PARAM_BOOL    , PARAM_NORMAL, "", PARAM_TRUE, PARAM_TRUE },
+{ "-free"    ,  "-free_parameters"          , PARAM_FALSE       , PARAM_BOOL    , PARAM_NORMAL, "", PARAM_TRUE, PARAM_TRUE },
 
   // File options
 { "-f"      ,  "-file"                      , ""                , PARAM_STRING  , PARAM_NORMAL, "", PARAM_TRUE, PARAM_TRUE },
@@ -104,4 +105,3 @@ static string PARAM_DEFINED_ARGS[][8] = {
 };
 
 #endif
-

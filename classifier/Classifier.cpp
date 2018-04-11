@@ -133,6 +133,10 @@ void Classifier::train() {
       }
     }
 
+    // Check if we should count free parameters individually or not.
+    bool countFreeParametersIndividually = params_->GetBoolParam("-free");
+    if (countFreeParametersIndividually) Node::setCountFreeParametersIndividually();
+
     // Create profile
     tree_->clear();
 

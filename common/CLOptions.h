@@ -82,6 +82,7 @@ static string PARAM_DEFINED_ARGS[][8] =
 { "-opwd"     ,  "-output_file_path"        , ""                , PARAM_STRING  , PARAM_NORMAL, "", PARAM_TRUE, PARAM_TRUE },
 { "-ipwd"    ,  "-input_file_path"          , ""                , PARAM_STRING  , PARAM_NORMAL, "", PARAM_TRUE, PARAM_TRUE },
 { "-revcomp" ,  "-reverse_complement"       , PARAM_FALSE       , PARAM_BOOL    , PARAM_NORMAL, "", PARAM_TRUE, PARAM_TRUE },
+{ "-free"    ,  "-free_parameters"          , PARAM_FALSE       , PARAM_BOOL    , PARAM_NORMAL, "", PARAM_TRUE, PARAM_TRUE },
 
 
 { "-crr"     ,  "-create_random_repr"       , PARAM_FALSE       , PARAM_BOOL    , PARAM_NORMAL, "", PARAM_TRUE, PARAM_TRUE },

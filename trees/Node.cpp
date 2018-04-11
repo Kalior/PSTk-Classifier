@@ -12,6 +12,8 @@ using namespace trees;
 const Alphabet *Node::alphabet = NULL;
 int Node::NUMBERNODES = 0;
 int Node::DIMENSION = 0;
+bool Node::countFreeParametersIndividually = false;
+int Node::numberOfFreeParameters = 0;
 
 Node::Node()
     : s_(""),
@@ -26,6 +28,7 @@ Node::Node()
   for (size_t i = 0; i < alphabet->size(); ++i) {
     children_.push_back(NULL);
   }
+  numberOfFreeParameters += getNumberOfFreeParameters();
   ++NUMBERNODES;
 }
 
@@ -42,6 +45,7 @@ Node::Node(const string &s)
   for (size_t i = 0; i < alphabet->size(); ++i) {
     children_.push_back(NULL);
   }
+  numberOfFreeParameters += getNumberOfFreeParameters();
   ++NUMBERNODES;
 }
 
@@ -51,11 +55,15 @@ Node::~Node() {
   for (int i = 0; i < children_.size(); ++i) {
     if (children_[i] == NULL) hadNullPointer = true;
   }
+  numberOfFreeParameters -= getNumberOfFreeParameters();
   if (hadNullPointer) --DIMENSION;
 }
 
 void Node::setNode(Node *pn, const char &c) {
   bool hadNullPointer = false, hasNullPointer = false;
+
+  int previousFreeParameters = getNumberOfFreeParameters();
+
   for (int i = 0; i < children_.size(); ++i) {
     if (children_[i] == NULL) {
       hadNullPointer = true;
@@ -82,6 +90,10 @@ void Node::setNode(Node *pn, const char &c) {
 
   if (!hadNullPointer && hasNullPointer) ++DIMENSION;
   if (hadNullPointer && !hasNullPointer) --DIMENSION;
+
+  int freeParameters = getNumberOfFreeParameters();
+  numberOfFreeParameters -= previousFreeParameters;
+  numberOfFreeParameters += freeParameters;
 }
 
 /**
@@ -101,6 +113,9 @@ double Node::getTotalC() const {
  */
 void Node::setNode(Node *pn, const int &idx) {
   bool hadNullPointer = false, hasNullPointer = false;
+
+  int previousFreeParameters = getNumberOfFreeParameters();
+
   for (int i = 0; i < children_.size(); ++i) {
     if (children_[i] == NULL) {
       hadNullPointer = true;
@@ -124,6 +139,10 @@ void Node::setNode(Node *pn, const int &idx) {
 
   if (!hadNullPointer && hasNullPointer) ++DIMENSION;
   if (hadNullPointer && !hasNullPointer) --DIMENSION;
+
+  int freeParameters = getNumberOfFreeParameters();
+  numberOfFreeParameters -= previousFreeParameters;
+  numberOfFreeParameters += freeParameters;
 }
 
 void Node::checkIfLeaf() {
@@ -292,4 +311,19 @@ void Node::calculateProbabilities() {
     else
       nextSymbolProb_[i] = 0;
   }
+}
+
+int Node::getNumberOfFreeParameters() {
+  int nullChildren = getNumberOfNullChildren();
+  if (nullChildren > 0) return nullChildren - 1;
+  else return 0;
+}
+
+int Node::getNumberOfNullChildren() {
+  int numberOfNullChildren = 0;
+  for (int i = 0; i < getAlphabetSize(); ++i) {
+    Node *child = getNode(i);
+    if (child == NULL) ++numberOfNullChildren;
+  }
+  return numberOfNullChildren;
 }

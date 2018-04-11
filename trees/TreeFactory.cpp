@@ -35,6 +35,7 @@ string TreeFactory::toHelp() {
   m += "          KL = Kullback-Liebler-pruning\n";
   m += "          PS = Peres-Shields-prunine .                (\"KL\")\n";
   m += "          At present: Only implemented for PST!\n";
+  m += "-free:    Specify true if the number of free parameters should be counted indivudially\n";
   m += "-------------------------\n";
   return m;
 }
