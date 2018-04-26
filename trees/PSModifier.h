@@ -89,6 +89,7 @@ public:
    */
   int getOrder();
 
+  double getDelta(Node *pNode, Node *next) { return 0.0; }
 protected:
   /**
    * Assign delta to all nodes and stores the results in nodes

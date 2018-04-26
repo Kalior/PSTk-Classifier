@@ -146,6 +146,7 @@ double KLModifier::getDelta(Node *pNode, Node *next) {
     if (p_wu == 0 || p_w == 0) continue;
     res += p_wu * log(p_wu / p_w) * next->getTotalC();
   }
+  next->setDelta(res);
   next->setTmpData(res);
   return res;
 }

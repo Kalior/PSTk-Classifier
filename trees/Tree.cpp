@@ -639,7 +639,18 @@ void Tree::save(Node *pNode, ofstream &fout) {
       fout << -1 << " ";
     }
   }
-  fout << " ]" << endl;
+  fout << "] [";
+  for (int i = 0; i < Node::getAlphabetSize(); ++i) {
+    Node *next = pNode->getNode(i);
+    if (next != NULL) {
+      double delta = next->getDelta();
+      fout.precision(17);
+      fout << fixed << delta << " ";
+    } else {
+      fout << -1 << " ";
+    }
+  }
+  fout << "]" << endl;
   for (int i = 0; i < Node::getAlphabetSize(); ++i) {
     if (pNode->getNode(i) != NULL) {
       this->save(pNode->getNode(i), fout);

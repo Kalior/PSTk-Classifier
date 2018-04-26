@@ -83,6 +83,8 @@ class TreeModifier {
    */
   virtual int getOrder() {}
 
+  virtual double getDelta(Node *pNode, Node *next) {}
+
  protected:
   Node *head_;
   Tree *tree_;

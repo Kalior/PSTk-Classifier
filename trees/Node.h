@@ -288,6 +288,8 @@ class Node {
    */
   void print(const bool & = false) const;
 
+  void setDelta(const double d) { delta = d; }
+  double getDelta() { return delta; }
 
   int getNumberOfFreeParameters();
   int getNumberOfNullChildren();
@@ -322,6 +324,8 @@ class Node {
   // stored temporary
   double tmpData_;
   bool schedualToBeRemove_;
+
+  double delta;
 };
 }  // namespace trees
 #endif

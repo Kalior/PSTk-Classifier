@@ -61,8 +61,8 @@ class KLModifier : public TreeModifier {
    */
   int getOrder() { return -1; }
 
- protected:
   double getDelta(Node *pNode, Node *next);
+ protected:
   void getAllDeltas(Node *pNode, vector<double> &deltas);
   void prune(Node *pNode, const double &cutoff, bool &hasRemoved);
   bool prune(Node *pNode, const double &cutoff, bool &hasRemoved,

@@ -30,6 +30,7 @@ Node::Node()
   }
   numberOfFreeParameters += getNumberOfFreeParameters();
   ++NUMBERNODES;
+  delta = -1;
 }
 
 Node::Node(const string &s)
