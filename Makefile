@@ -6,12 +6,10 @@ LIB3 = trees
 
 APP1 = classifier
 
-DIST_DIR = path/to/where/this/is/used
 
 APPS:
 	( make LIBS )
 	( cd $(APP1); make; mv $(APP1) ../bin )
-	( cp bin/$(APP1) $(DIST_DIR))
 
 LIBS:
 	( cd $(LIB1); make install )
