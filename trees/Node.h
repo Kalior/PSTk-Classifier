@@ -248,7 +248,7 @@ class Node {
   /**
    * Each node has a unique identifier
    */
-  int setId(const int &id) { id_ = id; }
+  void setId(const int &id) { id_ = id; }
 
   /**
    * Adjusted probabilities are used in some analysis such as AIC and BIC
